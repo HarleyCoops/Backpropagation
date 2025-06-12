@@ -1,0 +1,59 @@
+IMPLEMENTATION PLAN: BACKPROPAGATION MUSEUM PROJECT
+
+1. PROJECT CONTEXT AND CURRENT STATE
+
+- Goal: Build an educational, interactive "museum" around the iconic Backpropagation and Backpropagation Through Time (BPTT) algorithms, including code, narrative, and historical context.
+- Current Assets:
+    * mcp_server.py: FastAPI MCP server with tools for web/arXiv search, OpenAI code generation, LaTeX-to-code, and resource access.
+    * BP.tex: Full LaTeX source of Werbos's BPTT paper, with equations and pseudocode.
+    * BP_review.md: Detailed summary of BPTT, including mathematical and algorithmic insights.
+    * requirements.txt, setup.ps1, config.env: Well-structured for ML, LLM, and documentation workflows.
+    * Missing: No actual Python implementation of BPTT in the codebase yet; no educational notebooks or visualizations; no README.
+
+2. OPPORTUNITIES FOR VALUABLE TASKS
+
+A. Implement Werbos's Backpropagation Through Time (BPTT) in Modern Python (NumPy)
+   - Why: The core of the "museum" should be a faithful, well-documented, and educational implementation of BPTT, directly inspired by the equations and pseudocode in BP.tex.
+   - How:
+       * Extract the mathematical equations and pseudocode from BP.tex and BP_review.md.
+       * Implement a minimal, transparent NumPy version of BPTT for a simple RNN.
+       * Include comments and docstrings referencing the original equations.
+       * Optionally, provide a Jupyter notebook for step-by-step demonstration.
+
+B. LaTeX-to-Code Extraction Tool
+   - Why: Automate the conversion of LaTeX equations (from BP.tex) into executable Python/NumPy code, leveraging the server's latex_to_code tool.
+   - How:
+       * Parse BP.tex for key equations.
+       * Use the MCP server's tool to generate code.
+       * Validate and document the generated code.
+
+C. Educational Notebook/Visualization
+   - Why: Make the concepts accessible to learners by visualizing the forward and backward passes, gradients, and temporal unrolling.
+   - How:
+       * Create a Jupyter notebook in notebooks/ that walks through BPTT on a toy sequence problem.
+       * Use matplotlib for visualizations.
+
+D. Project README and Documentation
+   - Why: The README is currently empty; a clear, inviting README is essential for onboarding and project clarity.
+   - How:
+       * Summarize the project, its goals, and how to run the server and code.
+       * Link to BP.tex, BP_review.md, and any implemented code/notebooks.
+
+E. Claude Code MCP Server Integration
+   - Why: As per instructions.txt, install and run the Claude code MCP server for Anthropic integration.
+   - How:
+       * Follow setup instructions for the Claude MCP server.
+       * Add configuration and test endpoints.
+
+3. CHOSEN TASK: IMPLEMENT BPTT IN MODERN PYTHON (NUMPY)
+
+Rationale:
+Implementing BPTT in Python/NumPy is the most foundational and educational task. It directly supports the museum's mission, leverages the provided LaTeX and review materials, and creates a base for further educational content and tools.
+
+Next Steps:
+- Extract equations and pseudocode from BP.tex and BP_review.md.
+- Write a minimal, well-commented NumPy implementation of BPTT.
+- Document the code with references to the original paper.
+- (Optional) Create a Jupyter notebook for demonstration and visualization.
+
+END OF PLAN
