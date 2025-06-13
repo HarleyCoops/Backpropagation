@@ -1,0 +1,82 @@
+How to Use the Connected Anthropic MCP Server
+=============================================
+
+The Anthropic MCP server exposes the ANTHROPIC-CHAT tool, which lets you interact with Claude (Anthropic's LLM) by sending instructions and receiving responses.
+
+You can use this tool from any client that can send HTTP POST requests to your MCP server.
+
+---------------------------------------------
+Step 1: Ensure the MCP Server is Running
+---------------------------------------------
+Start your MCP server (on E2B or locally):
+
+    python mcp_server.py
+
+---------------------------------------------
+Step 2: Prepare Your API Request
+---------------------------------------------
+Send a POST request to the /mcp endpoint with a JSON body specifying the tool and your instruction.
+
+Example using curl:
+
+    curl -X POST http://<E2B_SERVER_HOST>:<PORT>/mcp \
+      -H "Content-Type: application/json" \
+      -d '{
+            "method": "tools/call",
+            "params": {
+                "name": "ANTHROPIC-CHAT",
+                "arguments": {
+                    "instruction": "Summarize the key ideas of Werbos' Backpropagation Through Time paper in 5 bullet points."
+                }
+            }
+          }'
+
+Replace <E2B_SERVER_HOST> and <PORT> with your server's address and port.
+
+---------------------------------------------
+Step 3: Interpret the Response
+---------------------------------------------
+The server will return a JSON response with the output from Claude. For example:
+
+    {
+      "result": {
+        "response": "1. BPTT is a generalization of backpropagation for recurrent neural networks...\n2. ..."
+      },
+      "id": null
+    }
+
+---------------------------------------------
+Step 4: Programmatic Usage (Python Example)
+---------------------------------------------
+You can also use Python's requests library:
+
+```python
+import requests
+
+url = "http://<E2B_SERVER_HOST>:<PORT>/mcp"
+payload = {
+    "method": "tools/call",
+    "params": {
+        "name": "ANTHROPIC-CHAT",
+        "arguments": {
+            "instruction": "Write a haiku about neural networks."
+        }
+    }
+}
+response = requests.post(url, json=payload)
+print(response.json())
+```
+
+---------------------------------------------
+Notes
+---------------------------------------------
+- The "instruction" parameter can be any prompt or task you want Claude to perform.
+- Make sure your ANTHROPIC_API_KEY is set in config.env and the server has restarted after editing.
+- You can use this tool for summarization, code generation, Q&A, creative writing, and more.
+
+---------------------------------------------
+Summary
+---------------------------------------------
+1. Start the MCP server with Anthropic API key configured.
+2. Send a POST request to /mcp with method "tools/call", name "ANTHROPIC-CHAT", and your instruction.
+3. Receive and use the response from Claude.
